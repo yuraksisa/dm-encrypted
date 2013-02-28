@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/yuraksisa/dm-encrypted"
   s.require_paths = ["lib"]
   s.summary = "Encrypted column type for DataMapper."
+  s.files   = Dir['lib/**/*.rb','spec/**/*.rb']
 
   s.add_development_dependency "rake"
   s.add_development_dependency "rspec"
