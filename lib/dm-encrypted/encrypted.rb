@@ -1,19 +1,18 @@
 module DataMapper
-  module Types
-    class Encrypted < DataMapper::Type
-      primitive String
+  class Property 
+    class Encrypted < String 
 
-      def self.load(value, property)
+      def load(value)
         return unless value
         RCrypt.decrypt(value, ::PRIVATE_KEY)
       end
 
-      def self.dump(value, property)
+      def dump(value)
         return unless value
         RCrypt.encrypt(value, ::PUBLIC_KEY)
       end
 
-      def self.typecast(value, property)
+      def typecast(value)
         return value if value.is_a?(String)
         return value.to_s if value.respond_to? :to_s
         value
