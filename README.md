@@ -1,21 +1,32 @@
-dm-encrypted
+dm-encrypte-ysdd
 ======
 A [DataMapper](http://github.com/datamapper/data_mapper)
 [type](http://github.com/datamapper/dm-more/tree/master/dm-types) that supports
-RSA encrypted columns.
+encrypted columns.
+
+It's a fork of qhoxie/dm-encrypted project, hosted on Github. 
+
+It works on DM 1.2 and allows the encryption of long strings.
+
+It uses AES to crypt the cipher the data. The AES 256 bits key and the AES initialization vector
+are both encrypted using a RSA key.
+
 
 Installation
 ------------
-    gem install rcrypt dm-encrypted --source http://gemcutter.org
+    gem install dm-ysd-encrypted 
 
 Usage
 -----
-Private and public key constants need to be set:
+Configure the Crypto:
+    
+    rsa_key = OpenSSL::PKey::RSA.generate(2048) 
 
-    PRIVATE_KEY = "-----BEGIN RSA PRIVATE KEY-----\nMIIEpgI..."
-    PUBLIC_KEY = "-----BEGIN RSA PUBLIC KEY-----\nXLPBCgK..."
+    Crypto.configure({:rsa_key => my_rsa_key,
+      :aes_key => rsa_key.public_encrypt(Digest::SHA2.new(256).digest('password')),
+      :aes_iv => rsa_key.public_encrypt(rand.to_s)}
 
-In your models, you simply specify the column type as Encrypted:
+In your models, you simply specify the column type as Encrypted (String) or TextEncrypted (Text):
 
     class Account
       include DataMapper::Resource
@@ -38,7 +49,7 @@ However it is ciphertext in the database:
 
 Comments/Suggestions/Requests
 ----------------------------
-Email me: qhoxie on gmail.com
+Email me: yurak.sisa.dream@gmail.com
 
 Copyright
 ---------

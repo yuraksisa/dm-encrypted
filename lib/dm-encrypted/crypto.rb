@@ -1,5 +1,4 @@
 require 'openssl'
-require 'digest/sha2'
 require 'base64'
 
 module Crypto

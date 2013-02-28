@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dm-encrypted (0.1.3)
+    dm-encrypted-ysd (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -52,6 +52,8 @@ GEM
     json_pure (1.7.7)
     multi_json (1.6.1)
     rake (10.0.3)
+    rdoc (4.0.0)
+      json (~> 1.4)
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
@@ -68,6 +70,7 @@ PLATFORMS
 
 DEPENDENCIES
   data_mapper
-  dm-encrypted!
+  dm-encrypted-ysd!
   rake
+  rdoc
   rspec
