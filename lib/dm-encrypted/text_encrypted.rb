@@ -1,7 +1,7 @@
 
 module DataMapper
   class Property 
-    class Encrypted < String 
+    class TextEncrypted < Text  
       extend ::Crypto
 
       def load(value)

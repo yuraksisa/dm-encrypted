@@ -1,57 +1,33 @@
 require 'rubygems'
 require 'rake'
 
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gem|
-    gem.name = "dm-encrypted"
-    gem.summary = %Q{Encrypted column type for DataMapper.}
-    gem.description = %Q{Transparently add RSA encryption to DataMapper models.}
-    gem.email = "qhoxie@gmail.com"
-    gem.homepage = "http://github.com/qhoxie/dm-encrypted"
-    gem.authors = ["Quin Hoxie"]
-    gem.add_dependency "rcrypt"
-    gem.add_development_dependency "thoughtbot-shoulda"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
-  end
-rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
+require 'rspec/core/rake_task'
+
+desc "Default: run specs."
+task :default => :spec
+
+desc "Run specs"
+RSpec::Core::RakeTask.new do |t|
+  t.pattern = "./spec/**/*_spec.rb"
 end
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/*_test.rb'
-  test.verbose = true
+desc "Generate code coverage"
+RSpec::Core::RakeTask.new(:coverage) do |t|
+  t.pattern = "./spec/**/*_spec.rb"
+  t.rcov = true
+  t.rcov_opts = ['--exclude', 'spec']
 end
 
-begin
-  require 'rcov/rcovtask'
-  Rcov::RcovTask.new do |test|
-    test.libs << 'test'
-    test.pattern = 'test/**/*_test.rb'
-    test.verbose = true
-  end
-rescue LoadError
-  task :rcov do
-    abort "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
-  end
-end
-
-task :test => :check_dependencies
-
-task :default => :test
-
-require 'rake/rdoctask'
-Rake::RDocTask.new do |rdoc|
-  if File.exist?('VERSION')
-    version = File.read('VERSION')
-  else
-    version = ""
-  end
-
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "dm-encrypted #{version}"
-  rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/**/*.rb')
-end
+#require 'rdoc/task'
+#RDoc::Task.new do |rdoc|
+#  if File.exist?('VERSION')
+#    version = File.read('VERSION')
+#  else
+#    version = ""
+#  end
+#
+#  rdoc.rdoc_dir = 'rdoc'
+#  rdoc.title = "dm-encrypted #{version}"
+#  rdoc.rdoc_files.include('README*')
+#  rdoc.rdoc_files.include('lib/**/*.rb')
+#end

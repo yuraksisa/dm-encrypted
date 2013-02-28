@@ -1,4 +1,4 @@
-require 'rcrypt'
+require 'dm-encrypted/crypto'
 require 'dm-core'
 
 module DataMapper
