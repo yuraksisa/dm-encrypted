@@ -1,4 +1,4 @@
-dm-encrypte-ysdd
+dm-encrypted
 ======
 A [DataMapper](http://github.com/datamapper/data_mapper)
 [type](http://github.com/datamapper/dm-more/tree/master/dm-types) that supports
